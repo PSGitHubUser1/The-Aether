@@ -50,6 +50,7 @@ minecraft {
             //Only uncomment this if you actually need the debug logging! If you enable this the log will be full of incredibly useless information spam
             //property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             //property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.disableRefmap', 'true'
 
             mods {
                 aether {
@@ -121,8 +122,9 @@ dependencies {
         jarJar.ranged(it, "[${project.curios_version},)")
         jarJar.pin(it, "${project.curios_version}")
     }
-
-    // compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${project.crafttweaker_version}")
+ 
+    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${project.crafttweaker_version}")
+    runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${project.crafttweaker_version}")
 
     //compileOnly fg.deobf("curse.maven:colytra-280200:${project.colytra_version}")
     //compileOnly fg.deobf("curse.maven:curious-elytra-317716:${project.curiouselytra_version}")
@@ -201,6 +203,7 @@ publishing {
 mixin {
     config "aether.mixins.json"
     add sourceSets.main, "aether.refmap.json"
+    env.disableRefmap true
 }
 
 build {

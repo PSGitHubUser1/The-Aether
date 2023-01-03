@@ -58,6 +58,10 @@ public class AltarBlockEntity extends AbstractAetherFurnaceBlockEntity {
 
 	public static void addItemEnchantingTime(ItemLike itemProvider, int burnTime) {
 		Item item = itemProvider.asItem();
-		getEnchantingMap().put(item, burnTime);
+        if (burnTime <= 0) {
+            getEnchantingMap().remove(item);
+        } else {
+		    getEnchantingMap().put(item, burnTime);
+        }
 	}
 }

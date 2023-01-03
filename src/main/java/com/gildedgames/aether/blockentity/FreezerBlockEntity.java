@@ -58,6 +58,10 @@ public class FreezerBlockEntity extends AbstractAetherFurnaceBlockEntity {
 
 	public static void addItemFreezingTime(ItemLike itemProvider, int burnTime) {
 		Item item = itemProvider.asItem();
-		getFreezingMap().put(item, burnTime);
+        if (burnTime <= 0) {
+            getFreezingMap().remove(item);
+        } else {
+		    getFreezingMap().put(item, burnTime);
+        }
 	}
 }
